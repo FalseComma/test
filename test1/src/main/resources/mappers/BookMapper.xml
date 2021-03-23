@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--数据库语句映射配置文件-->
+<!--配置文件命名空间：注意改名字唯一-->
+<mapper namespace="dao.BookDao">
+    <!--
+    查询数据
+    在Mybatis里面 #{}传输局是预编译
+    ${}是把数据拼接到语句里面
+    综上所述：在Mybatis里面建议使用#{}
+    -->
+    <select id="getBooks" resultType="beans.Book">
+       select  * from books
+    </select>
+
+    <select id="getBooksByID" resultType="beans.Book">
+        select * from books where id=#{id}
+    </select>
+
+    <select id="getBooksByName" resultType="beans.Book">
+        select * from books where name=#{name}
+    </select>
+
+    <select id="getBooksByNameAndID" resultType="beans.Book">
+        select * from books where name=#{name} and id=#{id}
+    </select>
+
+    <insert id="addBook">
+        insert into books (name,price,repertory,sale) values (#{name},#{price},#{repertory},#{sale})
+    </insert>
+
+    <delete id="deleteBook">
+        delete from books where id=#{id}
+    </delete>
+
+    <update id="updateBook">
+        update books set name=#{name},price=#{price},repertory=#{repertory},sale=#{sale} where id=#{id}
+    </update>
+
+    <!--
+     查询语句返回结果集的时候如果想要数据和对象属性一一对应则必须要求该类的属性和数据库的字段名一致
+
+     存在问题：字段对应不上则无法把结果解析
+     为了解决这个映射不够灵活问题，我们可以人为指定数据的对应关系
+    -->
+    <!--    <resultMap id="bookOut" type="beans.Book">-->
+    <!--        &lt;!&ndash;指定字段的映射关系&ndash;&gt;-->
+    <!--        <result property="name" column="bookName"/>-->
+    <!--        &lt;!&ndash;没有指定映射关系的则按照属性名<->表字段名映射   &ndash;&gt;-->
+    <!--    </resultMap>-->
+</mapper>

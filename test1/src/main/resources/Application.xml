@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <util:properties location="classpath:DB.properties"></util:properties>
+    <context:component-scan base-package="dao"></context:component-scan>
+
+    <bean id="c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <!--驱动-->
+        <property name="driverClass" value="#{db.driver}"></property>
+        <!--jdbcUrl-->
+        <property name="jdbcUrl" value="#{db.url}"></property>
+        <!--用户名-->
+        <property name="user" value="#{db.name}"></property>
+        <!--密码-->
+        <property name="password" value="#{db.psw}"></property>
+        <!--最大连接数-->
+        <property name="maxPoolSize" value="10"></property>
+        <!--最小连接数-->
+        <property name="minPoolSize" value="2"></property>
+    </bean>
+
+</beans>
