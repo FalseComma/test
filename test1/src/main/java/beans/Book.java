@@ -17,6 +17,8 @@ public class Book {
     }
 
     public Book(String name, double price, int repertory, int sale) {
+        int i = 0;
+
         this.name = name;
         this.price = price;
         this.repertory = repertory;
